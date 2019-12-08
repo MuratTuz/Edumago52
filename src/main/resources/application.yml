@@ -1,8 +1,8 @@
 
 server:
-  - servlet:
-      context-path: "/api/v1/"
-  - port: 9000
+  servlet:
+    context-path: "/api/v1/"
+  port: 9000
 
 
 spring:
@@ -31,6 +31,13 @@ logging:
     org.springframework: ERROR
 
 ---
+
+
+server:
+  servlet:
+    context-path: "/api/v1/"
+  port: 9000
+
 
 spring:
   profiles:
