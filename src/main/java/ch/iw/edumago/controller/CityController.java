@@ -37,7 +37,7 @@ public class CityController {
             return new ResponseEntity<Void>(HttpStatus.CONFLICT);
         }
         HttpHeaders headers = new HttpHeaders();
-        headers.setLocation(builder.path("/article/{id}").buildAndExpand(city.getId()).toUri());
+        headers.setLocation(builder.path("/city/{id}").buildAndExpand(city.getId()).toUri());
         return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
     }
 
