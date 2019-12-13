@@ -1,0 +1,32 @@
+
+server:
+  servlet:
+    context-path: "/api/v1/"
+  port: 9000
+
+
+logging:
+  level:
+    org.springframework: ERROR
+
+
+spring:
+  profiles:
+    active: prod
+  datasource:
+    url: "jdbc:postgresql://smsys-database.c770b9ur1mtc.eu-west-1.rds.amazonaws.com:5448/edumago"
+    username: "edumago"
+    password: "!*!2019Edumago"
+    initialization-mode: always
+    platform: postgres
+  jpa:
+    - properties:
+        hibernate:
+          dialect: org.hibernate.dialect.PostgreSQLDialect
+          ddl-auto: update
+        jdbc:
+          lob:
+            non_contextual_creation: true
+    - main:
+        banner-mode: off
+
