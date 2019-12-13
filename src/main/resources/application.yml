@@ -1,5 +1,5 @@
 spring:
   profiles:
-    active: ${spring_profiles_active}:dev
+    active: dev
 
     # on aws container will be started with -prod
