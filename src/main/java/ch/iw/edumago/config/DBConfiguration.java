@@ -17,7 +17,7 @@ public class DBConfiguration {
     @Profile("dev")
     @Bean
     public String devDatabasConfiguration(){
-        System.out.println(url);
+        System.out.println("current url: " + url);
         return "Running dev configuration";
     }
 

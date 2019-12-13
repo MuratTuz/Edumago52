@@ -14,7 +14,7 @@ public class EdumagoApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) {
-		System.out.println("EDUMAGO" + serverProperties.toString());
+		System.out.println("EDUMAGO " + String.join(" ", args));
 	}
 
 	public static void main(String[] args) {
