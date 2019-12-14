@@ -17,14 +17,14 @@ public class DBConfiguration {
     @Profile("dev")
     @Bean
     public String devDatabasConfiguration(){
-        System.out.println("current url: " + url);
+        System.out.println(".....DEVELOPMENT.....");
         return "Running dev configuration";
     }
 
     @Profile("prod")
     @Bean
     public String prodDatabasConfiguration(){
-        System.out.println(url);
+        System.out.println(".....PRODUCTION.....");
         return "Running prod configuration";
     }
 

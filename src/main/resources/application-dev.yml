@@ -14,9 +14,9 @@ spring:
   profiles:
     active: dev
   datasource:
-    url: "jdbc:postgresql://localhost:5433/edumago"
+    url: "jdbc:postgresql://localhost:5432/edumago"
     username: "postgres"
-    password: 99032
+    password: "edumago"
     initialization-mode: always
     platform: postgres
   jpa:
