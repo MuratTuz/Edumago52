@@ -16,7 +16,7 @@ import java.net.URL;
 public class VersionController {
 
     @GetMapping("/version")
-    public ResponseEntity<VersionInfo> getAllCity() {
+    public ResponseEntity<VersionInfo> getVersion() {
 
         try{
             URL versionJsonUrl = VersionController.class
