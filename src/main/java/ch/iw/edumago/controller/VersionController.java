@@ -1,10 +1,7 @@
 package ch.iw.edumago.controller;
 
 import ch.iw.edumago.dto.VersionInfo;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
-import jdk.internal.org.objectweb.asm.TypeReference;
-import jdk.nashorn.internal.parser.JSONParser;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
