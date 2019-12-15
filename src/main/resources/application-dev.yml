@@ -9,23 +9,17 @@ logging:
   level:
     org.springframework: ERROR
 
-
 spring:
   profiles:
     active: dev
+  jpa:
+    database: POSTGRESQL
+    show-sql: true
+    hibernate:
+      ddl-auto: update
   datasource:
+    platform: postgres
     url: "jdbc:postgresql://localhost:5432/edumago"
     username: "postgres"
     password: "edumago"
-    initialization-mode: always
-    platform: postgres
-  jpa:
-    - properties:
-        hibernate:
-          dialect: org.hibernate.dialect.PostgreSQLDialect
-          ddl-auto: update
-        jdbc:
-          lob:
-            non_contextual_creation: true
-    - main:
-        banner-mode: off
+    driverClassName: org.postgresql.Driver

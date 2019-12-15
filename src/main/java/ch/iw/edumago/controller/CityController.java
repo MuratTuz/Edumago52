@@ -32,13 +32,14 @@ public class CityController {
 
     @PostMapping("city")
     public ResponseEntity<Void> addCity(@RequestBody City city, UriComponentsBuilder builder) {
-        boolean flag = cityService.addCity(city);
-        if (flag == false) {
-            return new ResponseEntity<Void>(HttpStatus.CONFLICT);
+        try{
+            boolean flag = cityService.addCity(city);
+            return new ResponseEntity<Void>(HttpStatus.CREATED);
+        }catch (Exception ex)
+        {
+            String a = ex.getMessage();
+            return new ResponseEntity<Void>( HttpStatus.BAD_REQUEST);
         }
-        HttpHeaders headers = new HttpHeaders();
-        headers.setLocation(builder.path("/city/{id}").buildAndExpand(city.getId()).toUri());
-        return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
     }
 
     @PutMapping("city")
