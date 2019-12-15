@@ -14,7 +14,7 @@ phases:
       - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)  
       - IMAGE_TAG=${COMMIT_HASH:=latest}
       - START_DATE=$(date -d @$CODEBUILD_START_TIME)
-      - echo -e "{\"buildId\":\""$CODEBUILD_BUILD_ID"\", \"startTime\":\""$START_DATE"\", \"initiator\":\""$CODEBUILD_INITIATOR"\", \"buildNumber\":\""$CODEBUILD_BUILD_NUMBER"\"}" > version.json
+      - echo "{\"buildId\":\""$CODEBUILD_BUILD_ID"\", \"startTime\":\""$START_DATE"\", \"initiator\":\""$CODEBUILD_INITIATOR"\", \"buildNumber\":\""$CODEBUILD_BUILD_NUMBER"\"}" > version.json
       - mkdir -p $CODEBUILD_SRC_DIR/src/main/resources/static
       - mv version.json $CODEBUILD_SRC_DIR/src/main/resources/static/
       - cat $CODEBUILD_SRC_DIR/src/main/resources/static/version.json
