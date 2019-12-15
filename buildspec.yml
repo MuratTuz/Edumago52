@@ -16,8 +16,8 @@ phases:
       - printf '{"commitId":"%s", "startTime":"%s", "initiator":"%s", "buildId":"%s"}' $CODEBUILD_WEBHOOK_PREV_COMMIT $CODEBUILD_START_TIME $CODEBUILD_INITIATOR $CODEBUILD_BUILD_ID  > version.json
       - pwd
       - ls
-      - mv version.json $CODEBUILD_SRC_DIR/main/resources/static/
-      - cat $CODEBUILD_SRC_DIR/main/resources/static/main/resources/static/version.json
+      - mv version.json $CODEBUILD_SRC_DIR/src/main/resources/static/
+      - cat $CODEBUILD_SRC_DIR/src/main/resources/static/main/resources/static/version.json
   build:  
     commands:  
       - echo Build started on `date`  
