@@ -16,7 +16,7 @@ phases:
       - START_DATE=$(date -d @$CODEBUILD_START_TIME)
       - echo "{\"buildId\":\""$CODEBUILD_BUILD_ID"\", \"startTime\":\""$START_DATE"\", \"initiator\":\""$CODEBUILD_INITIATOR"\", \"buildNumber\":\""$CODEBUILD_BUILD_NUMBER"\"}" > version.json
       - mkdir -p $CODEBUILD_SRC_DIR/src/main/resources/static
-      - mv $CODEBUILD_SRC_DIR/version.json $CODEBUILD_SRC_DIR/src/main/resources/static/
+      - cp $CODEBUILD_SRC_DIR/version.json $CODEBUILD_SRC_DIR/src/main/resources/static/
       - cat $CODEBUILD_SRC_DIR/src/main/resources/static/version.json
   build:  
     commands:  
