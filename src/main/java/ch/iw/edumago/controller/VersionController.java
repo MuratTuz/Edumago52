@@ -33,9 +33,13 @@ public class VersionController {
                 info = gson.fromJson(new FileReader(path), VersionInfo.class);
                 return new ResponseEntity<VersionInfo>(info, HttpStatus.OK);
             }
-            return new ResponseEntity<VersionInfo>(HttpStatus.NO_CONTENT);
+            info = new VersionInfo();
+            info.setBuildId("File does not exist. path:" + path);
+            return new ResponseEntity<VersionInfo>(info, HttpStatus.OK);
         }catch (Exception ex){
-            return new ResponseEntity<VersionInfo>(new VersionInfo(), HttpStatus.OK);
+            VersionInfo version = new VersionInfo();
+            version.setBuildId("There was an error: " + ex.getMessage());
+            return new ResponseEntity<VersionInfo>(version, HttpStatus.OK);
         }
     }
 }
