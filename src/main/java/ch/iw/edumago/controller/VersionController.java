@@ -24,7 +24,7 @@ public class VersionController {
 
             VersionInfo info = null;
 
-            String path = file.getPath();
+            String path = file.toPath().toString();
 
             File f = new File(path);
             if(f.exists() && !f.isDirectory()) {
@@ -35,7 +35,7 @@ public class VersionController {
             }
             return new ResponseEntity<VersionInfo>(HttpStatus.NO_CONTENT);
         }catch (Exception ex){
-            return new ResponseEntity<VersionInfo>(HttpStatus.SERVICE_UNAVAILABLE);
+            return new ResponseEntity<VersionInfo>(new VersionInfo(), HttpStatus.OK);
         }
     }
 }
