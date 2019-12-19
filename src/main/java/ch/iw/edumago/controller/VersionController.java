@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.util.ResourceUtils;
 
 import java.io.File;
 import java.io.FileReader;
@@ -19,12 +20,11 @@ public class VersionController {
     public ResponseEntity<VersionInfo> getVersion() {
 
         try{
-            URL versionJsonUrl = VersionController.class
-                    .getClassLoader().getResource("static/version.json");
+            File file = ResourceUtils.getFile("classpath:static/version.json");
 
             VersionInfo info = null;
 
-            String path = versionJsonUrl.getPath();
+            String path = file.getPath();
 
             File f = new File(path);
             if(f.exists() && !f.isDirectory()) {
