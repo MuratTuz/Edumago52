@@ -2,6 +2,8 @@ package ch.iw.edumago.controller;
 
 import ch.iw.edumago.dto.VersionInfo;
 import com.google.gson.Gson;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpStatus;
@@ -21,16 +23,22 @@ public class VersionController {
 
         VersionInfo info = null;
 
-        try(InputStream inputStream = getClass().getResourceAsStream("BOOT-INF/classes/version.json");
-            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))){
+        try{
+            ApplicationContext context
+                    = new ClassPathXmlApplicationContext();
 
-            String contents = reader.toString();
+                Resource file = context.getResource("classpath:/version.json");
 
-            Gson gson = new Gson();
+                if (file.exists())
+                {
+                    Gson gson = new Gson();
 
-            info = gson.fromJson(contents, VersionInfo.class);
+                    info = gson.fromJson(file.getFile().getPath(), VersionInfo.class);
+                    return new ResponseEntity<VersionInfo>(info, HttpStatus.OK);
+                }
+            info = new VersionInfo();
+            info.setBuildId("There was an error: path not found");
             return new ResponseEntity<VersionInfo>(info, HttpStatus.OK);
-
         } catch (IOException e) {
             info = new VersionInfo();
             info.setBuildId("There was an error: " + e.getMessage());
