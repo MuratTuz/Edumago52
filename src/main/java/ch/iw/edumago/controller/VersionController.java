@@ -33,7 +33,7 @@ public class VersionController {
                 {
                     Gson gson = new Gson();
 
-                    info = gson.fromJson(file.getFile().getPath(), VersionInfo.class);
+                    info = gson.fromJson(new FileReader(file.getFile().getPath()), VersionInfo.class);
                     return new ResponseEntity<VersionInfo>(info, HttpStatus.OK);
                 }
             info = new VersionInfo();
