@@ -21,7 +21,7 @@ public class VersionController {
 
         VersionInfo info = null;
 
-        try(InputStream inputStream = getClass().getResourceAsStream("/version.json");
+        try(InputStream inputStream = getClass().getResourceAsStream("BOOT-INF/classes/version.json");
             BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))){
 
             String contents = reader.toString();
