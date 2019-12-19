@@ -2,6 +2,8 @@ package ch.iw.edumago.controller;
 
 import ch.iw.edumago.dto.VersionInfo;
 import com.google.gson.Gson;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,22 +21,23 @@ public class VersionController {
     @GetMapping("/version")
     public ResponseEntity<VersionInfo> getVersion() {
 
+        VersionInfo info = null;
+
         try{
-            File file = ResourceUtils.getFile("classpath:static/version.json");
+            Resource resource = new ClassPathResource("static/version.json");
 
-            VersionInfo info = null;
+            InputStream input = resource.getInputStream();
 
-            String path = file.toPath().toString();
+            File file = resource.getFile();
 
-            File f = new File(path);
-            if(f.exists() && !f.isDirectory()) {
+            if(file.exists() && !file.isDirectory()) {
                 Gson gson = new Gson();
 
-                info = gson.fromJson(new FileReader(path), VersionInfo.class);
+                info = gson.fromJson(new FileReader(file), VersionInfo.class);
                 return new ResponseEntity<VersionInfo>(info, HttpStatus.OK);
             }
             info = new VersionInfo();
-            info.setBuildId("File does not exist. path:" + path);
+            info.setBuildId("File does not exist. path");
             return new ResponseEntity<VersionInfo>(info, HttpStatus.OK);
         }catch (Exception ex){
             VersionInfo version = new VersionInfo();
