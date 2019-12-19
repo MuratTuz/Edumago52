@@ -10,9 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.util.ResourceUtils;
 
-import java.io.File;
-import java.io.FileReader;
-import java.io.InputStream;
+import java.io.*;
 import java.net.URL;
 
 @RestController
@@ -23,26 +21,20 @@ public class VersionController {
 
         VersionInfo info = null;
 
-        try{
-            Resource resource = new ClassPathResource("version.json");
+        try(InputStream inputStream = getClass().getResourceAsStream("/version.json");
+            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))){
 
-            InputStream input = resource.getInputStream();
+            String contents = reader.toString();
 
-            File file = resource.getFile();
+            Gson gson = new Gson();
 
-            if(file.exists() && !file.isDirectory()) {
-                Gson gson = new Gson();
-
-                info = gson.fromJson(new FileReader(file), VersionInfo.class);
-                return new ResponseEntity<VersionInfo>(info, HttpStatus.OK);
-            }
-            info = new VersionInfo();
-            info.setBuildId("File does not exist. path");
+            info = gson.fromJson(contents, VersionInfo.class);
             return new ResponseEntity<VersionInfo>(info, HttpStatus.OK);
-        }catch (Exception ex){
-            VersionInfo version = new VersionInfo();
-            version.setBuildId("There was an error: " + ex.getMessage());
-            return new ResponseEntity<VersionInfo>(version, HttpStatus.OK);
+
+        } catch (IOException e) {
+            info = new VersionInfo();
+            info.setBuildId("There was an error: " + e.getMessage());
+            return new ResponseEntity<VersionInfo>(info, HttpStatus.OK);
         }
     }
 }
