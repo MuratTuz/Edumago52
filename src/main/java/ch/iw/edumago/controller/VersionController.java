@@ -24,7 +24,7 @@ public class VersionController {
         VersionInfo info = null;
 
         try{
-            Resource resource = new ClassPathResource("static/version.json");
+            Resource resource = new ClassPathResource("version.json");
 
             InputStream input = resource.getInputStream();
 
