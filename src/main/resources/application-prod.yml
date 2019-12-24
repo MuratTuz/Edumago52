@@ -19,14 +19,9 @@ spring:
     password: "!*!2019Edumago"
     initialization-mode: always
     platform: postgres
+    driverClassName: org.postgresql.Driver
   jpa:
-    - properties:
-        hibernate:
-          dialect: org.hibernate.dialect.PostgreSQLDialect
-          ddl-auto: update
-        jdbc:
-          lob:
-            non_contextual_creation: true
-    - main:
-        banner-mode: off
- 
+    database: POSTGRESQL
+    show-sql: true
+    hibernate:
+      ddl-auto: update
