@@ -9,23 +9,29 @@ logging:
   level:
     org.springframework: ERROR
 
-
 spring:
   profiles:
     active: dev
-  datasource:
-    url: "jdbc:postgresql://localhost:5432/edumago"
-    username: "postgres"
-    password: "edumago"
-    initialization-mode: always
-    platform: postgres
   jpa:
-    - properties:
-        hibernate:
-          dialect: org.hibernate.dialect.PostgreSQLDialect
-          ddl-auto: update
-        jdbc:
-          lob:
-            non_contextual_creation: true
-    - main:
-        banner-mode: off
+    database: POSTGRESQL
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+  datasource:
+    platform: org.hibernate.dialect.H2Dialect
+    url: jdbc:h2:mem:testdb
+    username: sa
+    password: password
+    driverClassName: org.h2.Driver
+#  datasource:
+#    platform: postgres
+#    url: "jdbc:postgresql://localhost:5432/edumago"
+#    username: "postgres"
+#    password: "edumago"
+#    driverClassName: org.postgresql.Driver
+
+
+
+# H2
+  spring.h2.console.enabled: true
+  spring.h2.console.path: /h2
