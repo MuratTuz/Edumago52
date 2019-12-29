@@ -15,7 +15,7 @@ import java.util.List;
 public class StudentController {
 
     @GetMapping
-    ResponseEntity<List<StudentDTO>> getAllStudents(){
+    ResponseEntity<List<StudentDTO>> getAllStudents() {
 
         StudentDTO mehmet = StudentDTO.builder().firstName("mehmet").lastName("dogan").build();
         StudentDTO deniz = StudentDTO.builder().firstName("deniz").lastName("tokat").build();

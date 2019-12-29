@@ -31,6 +31,8 @@ ENV CODEBUILD_WEBHOOK_HEAD_REF=$CODEBUILD_WEBHOOK_HEAD_REF
 ENV CODEBUILD_WEBHOOK_TRIGGER=$CODEBUILD_WEBHOOK_TRIGGER
 ENV HOME=$HOME
 
+RUN env
+
 ENTRYPOINT ["java", "-jar", "-Djava.security.egd=file:/dev/./urandom", "-Dspring.profiles.active=prod", "./target/edumago-0.0.1-SNAPSHOT.jar"]
 
 

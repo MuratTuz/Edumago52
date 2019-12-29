@@ -76,39 +76,39 @@ public class VersionInfo {
 
     public String WEBHOOK_TRIGGER;
 
-    public VersionInfo get(){
-       VersionInfo info = new VersionInfo();
+    public VersionInfo get() {
+        VersionInfo info = new VersionInfo();
 
-       info.DEFAULT_REGION = System.getenv(AWS_DEFAULT_REGION);
-       info.REGION = System.getenv(AWS_REGION);
-       info.BUILD_ARN = System.getenv(CODEBUILD_BUILD_ARN);
-       info.BUILD_ID = System.getenv(CODEBUILD_BUILD_ID);
-       info.BUILD_IMAGE = System.getenv(CODEBUILD_BUILD_IMAGE);
-       info.BUILD_NUMBER = System.getenv(CODEBUILD_BUILD_NUMBER);
-       info.BUILD_SUCCEEDING = System.getenv(CODEBUILD_BUILD_SUCCEEDING);
-       info.INITIATOR = System.getenv(CODEBUILD_INITIATOR);
-       info.KMS_KEY_ID = System.getenv(CODEBUILD_KMS_KEY_ID);
-       info.LOG_PATH = System.getenv(CODEBUILD_LOG_PATH);
-       info.RESOLVED_SOURCE_VERSION = System.getenv(CODEBUILD_RESOLVED_SOURCE_VERSION);
-       info.SOURCE_REPO_URL = System.getenv(CODEBUILD_SOURCE_REPO_URL);
-       info.SOURCE_VERSION = System.getenv(CODEBUILD_SOURCE_VERSION);
-       info.SRC_DIR = System.getenv(CODEBUILD_SRC_DIR);
-       info.START_TIME = this.getFormattedDate(System.getenv(CODEBUILD_START_TIME));
-       info.WEBHOOK_ACTOR_ACCOUNT_ID = System.getenv(CODEBUILD_WEBHOOK_ACTOR_ACCOUNT_ID);
-       info.WEBHOOK_BASE_REF = System.getenv(CODEBUILD_WEBHOOK_BASE_REF);
-       info.WEBHOOK_EVENT = System.getenv(CODEBUILD_WEBHOOK_EVENT);
-       info.WEBHOOK_PREV_COMMIT = System.getenv(CODEBUILD_WEBHOOK_PREV_COMMIT);
-       info.WEBHOOK_HEAD_REF = System.getenv(CODEBUILD_WEBHOOK_HEAD_REF);
-       info.WEBHOOK_TRIGGER = System.getenv(CODEBUILD_WEBHOOK_TRIGGER);
+        info.DEFAULT_REGION = System.getenv(AWS_DEFAULT_REGION);
+        info.REGION = System.getenv(AWS_REGION);
+        info.BUILD_ARN = System.getenv(CODEBUILD_BUILD_ARN);
+        info.BUILD_ID = System.getenv(CODEBUILD_BUILD_ID);
+        info.BUILD_IMAGE = System.getenv(CODEBUILD_BUILD_IMAGE);
+        info.BUILD_NUMBER = System.getenv(CODEBUILD_BUILD_NUMBER);
+        info.BUILD_SUCCEEDING = System.getenv(CODEBUILD_BUILD_SUCCEEDING);
+        info.INITIATOR = System.getenv(CODEBUILD_INITIATOR);
+        info.KMS_KEY_ID = System.getenv(CODEBUILD_KMS_KEY_ID);
+        info.LOG_PATH = System.getenv(CODEBUILD_LOG_PATH);
+        info.RESOLVED_SOURCE_VERSION = System.getenv(CODEBUILD_RESOLVED_SOURCE_VERSION);
+        info.SOURCE_REPO_URL = System.getenv(CODEBUILD_SOURCE_REPO_URL);
+        info.SOURCE_VERSION = System.getenv(CODEBUILD_SOURCE_VERSION);
+        info.SRC_DIR = System.getenv(CODEBUILD_SRC_DIR);
+        info.START_TIME = this.getFormattedDate(System.getenv(CODEBUILD_START_TIME));
+        info.WEBHOOK_ACTOR_ACCOUNT_ID = System.getenv(CODEBUILD_WEBHOOK_ACTOR_ACCOUNT_ID);
+        info.WEBHOOK_BASE_REF = System.getenv(CODEBUILD_WEBHOOK_BASE_REF);
+        info.WEBHOOK_EVENT = System.getenv(CODEBUILD_WEBHOOK_EVENT);
+        info.WEBHOOK_PREV_COMMIT = System.getenv(CODEBUILD_WEBHOOK_PREV_COMMIT);
+        info.WEBHOOK_HEAD_REF = System.getenv(CODEBUILD_WEBHOOK_HEAD_REF);
+        info.WEBHOOK_TRIGGER = System.getenv(CODEBUILD_WEBHOOK_TRIGGER);
 
-       return info;
+        return info;
     }
 
-    private String getFormattedDate(String date){
+    private String getFormattedDate(String date) {
         try {
             return new SimpleDateFormat("dd.M.yyyy HH:mm:ss")
                     .format(new Date(Long.parseLong(date)));
-        }catch (Exception ex){
+        } catch (Exception ex) {
             return null;
         }
     }
