@@ -13,10 +13,6 @@ phases:
       - REPOSITORY_URI=572909725151.dkr.ecr.eu-west-1.amazonaws.com/smsys-backend  
       - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)  
       - IMAGE_TAG=${COMMIT_HASH:=latest}
-      - START_DATE=$(date -d @$CODEBUILD_START_TIME)
-      - echo "{\"buildId\":\""$CODEBUILD_BUILD_ID"\", \"startTime\":\""$START_DATE"\", \"initiator\":\""$CODEBUILD_INITIATOR"\", \"buildNumber\":\""$CODEBUILD_BUILD_NUMBER"\"}" > version.json
-      - cp $CODEBUILD_SRC_DIR/version.json $CODEBUILD_SRC_DIR/src/main/resources/
-      - cat $CODEBUILD_SRC_DIR/src/main/resources/version.json
   build:  
     commands:  
       - echo Build started on `date`  
