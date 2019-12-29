@@ -1,8 +1,7 @@
 FROM maven:3.6-jdk-11
 VOLUME /tmp
 
-RUN apk update
-#RUN apk add maven
+RUN apt-get update
 
 COPY . .
 
