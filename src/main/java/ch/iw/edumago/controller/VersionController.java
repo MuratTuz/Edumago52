@@ -1,19 +1,11 @@
 package ch.iw.edumago.controller;
 
 import ch.iw.edumago.dto.VersionInfo;
-import com.google.gson.Gson;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.Resource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.util.ResourceUtils;
 
-import java.io.*;
-import java.net.URL;
 
 @RestController
 public class VersionController {
@@ -21,6 +13,7 @@ public class VersionController {
     @GetMapping("/version")
     public ResponseEntity<VersionInfo> getVersion() {
 
+        /*
         VersionInfo info = null;
 
         try{
@@ -44,5 +37,7 @@ public class VersionController {
             info.setBuildId("There was an error: " + e.getMessage());
             return new ResponseEntity<VersionInfo>(info, HttpStatus.OK);
         }
+         */
+        return new ResponseEntity<>(new VersionInfo(), HttpStatus.OK);
     }
 }
