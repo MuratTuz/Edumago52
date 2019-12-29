@@ -14,11 +14,14 @@ public class VersionController {
     public ResponseEntity<VersionInfo> getVersion() {
 
         try {
-            String time = System.getenv("CODEBUILD_START_TIME");
-            VersionInfo info = new VersionInfo();
-            return new ResponseEntity<VersionInfo>(info.get(), HttpStatus.OK);
+            return new ResponseEntity<VersionInfo>(new VersionInfo().get(), HttpStatus.OK);
         }catch (Exception e) {
             return new ResponseEntity<VersionInfo>(HttpStatus.NOT_FOUND);
         }
+    }
+
+    @GetMapping("/")
+    public ResponseEntity<HttpStatus> checkHealth() {
+        return new ResponseEntity<HttpStatus>(HttpStatus.OK);
     }
 }
