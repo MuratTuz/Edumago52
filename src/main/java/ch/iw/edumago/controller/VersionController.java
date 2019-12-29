@@ -14,7 +14,9 @@ public class VersionController {
     public ResponseEntity<VersionInfo> getVersion() {
 
         try {
-            return new ResponseEntity<VersionInfo>(new VersionInfo(), HttpStatus.OK);
+            String time = System.getenv("CODEBUILD_START_TIME");
+            VersionInfo info = new VersionInfo();
+            return new ResponseEntity<VersionInfo>(info.get(), HttpStatus.OK);
         }catch (Exception e) {
             return new ResponseEntity<VersionInfo>(HttpStatus.NOT_FOUND);
         }
