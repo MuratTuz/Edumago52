@@ -1,4 +1,4 @@
-FROM openjdk:8-jdk-alpine
+FROM 8-jdk-alpine-mvn
 VOLUME /tmp
 
 RUN apk update
