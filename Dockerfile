@@ -1,4 +1,4 @@
-FROM 8-jdk-alpine-mvn
+FROM maven:3.6-jdk-11
 VOLUME /tmp
 
 RUN apk update
