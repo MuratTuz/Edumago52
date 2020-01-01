@@ -1,6 +1,6 @@
 package ch.iw.edumago.controller;
 
-import ch.iw.edumago.dto.VersionInfo;
+import ch.iw.edumago.model.VersionInfo;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

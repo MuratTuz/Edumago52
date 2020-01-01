@@ -1,4 +1,4 @@
-package ch.iw.edumago.dto;
+package ch.iw.edumago.model;
 
 
 import lombok.*;

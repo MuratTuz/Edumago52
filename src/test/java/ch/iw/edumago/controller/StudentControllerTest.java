@@ -19,7 +19,6 @@ public class StudentControllerTest {
 
     @Autowired private MockMvc mockMvc;
 
-
     @Test
     @DisplayName("Get All Students")
     void findAllStudentsTest() throws Exception {

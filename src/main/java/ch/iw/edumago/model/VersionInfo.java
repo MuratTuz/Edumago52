@@ -1,13 +1,6 @@
-package ch.iw.edumago.dto;
+package ch.iw.edumago.model;
 
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.format.datetime.DateFormatter;
-
-import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.text.spi.DateFormatProvider;
 import java.util.Date;
 
 public class VersionInfo {
