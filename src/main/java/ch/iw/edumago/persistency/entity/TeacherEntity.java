@@ -11,7 +11,7 @@ import javax.validation.constraints.NotEmpty;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "teacher")
+@Table(name = "edu_teacher")
 @Setter
 @Getter
 @AllArgsConstructor
@@ -22,13 +22,18 @@ public class TeacherEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-
     @NotEmpty
-    @Column(name = "teacherName")
+    @Column(name = "tch_first_name")
     private String firstName;
 
     @NotBlank
+    @Column(name = "tch_last_name")
     private String lastName;
+
+    // todo: consider having a uuid like ssn (ahv)
+    @Column(name = "tch_register_id")
     private String registerId;
+
+    @Column(name = "tch_register_date")
     private LocalDate registerDate;
 }
