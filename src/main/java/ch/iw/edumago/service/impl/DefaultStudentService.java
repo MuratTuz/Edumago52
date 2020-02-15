@@ -10,21 +10,27 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
-public class DefaultUserService implements StudentService {
+public class DefaultStudentService implements StudentService {
 
+    private final StudentRepository studentRepository;
 
-    @Autowired private StudentRepository studentRepository;
+    public DefaultStudentService(StudentRepository studentRepository) {
+        this.studentRepository = studentRepository;
+    }
 
     @Override
     @Transactional
     public StudentDTO create(StudentDTO student) {
-
         StudentEntity studentEntity = StudentMapper.INSTANCE.toEntity(student);
-
         studentEntity = studentRepository.save(studentEntity);
 
         return StudentMapper.INSTANCE.toDto(studentEntity);
+    }
+
+    public List<StudentDTO> getAllStudents(){
+        return studentRepository.findAll().stream().map(StudentMapper.INSTANCE::toDto).collect(Collectors.toList());
     }
 }

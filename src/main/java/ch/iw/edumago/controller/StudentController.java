@@ -2,10 +2,12 @@ package ch.iw.edumago.controller;
 
 
 import ch.iw.edumago.model.StudentDTO;
+import ch.iw.edumago.service.StudentService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +23,8 @@ import java.util.List;
 @RequestMapping("/students")
 public class StudentController {
 
+    @Autowired
+    StudentService studentService;
 
     @ApiOperation(value = "View a list of available employees", response = List.class)
     @ApiResponses(value = {
@@ -32,9 +36,12 @@ public class StudentController {
     @GetMapping
     ResponseEntity<List<StudentDTO>> getAllStudents() {
 
-        StudentDTO mehmet = StudentDTO.builder().firstName("mehmet").lastName("dogan").build();
-        StudentDTO deniz = StudentDTO.builder().firstName("deniz").lastName("tokat").build();
+        //StudentDTO mehmet = StudentDTO.builder().firstName("mehmet").lastName("dogan").build();
+        //StudentDTO deniz = StudentDTO.builder().firstName("deniz").lastName("tokat").build();
 
-        return ResponseEntity.ok().body(Arrays.asList(mehmet, deniz));
+        //return ResponseEntity.ok().body(Arrays.asList(mehmet, deniz));
+        studentService.create(StudentDTO.builder().firstName("mehmet").lastName("dogan").build());
+
+        return ResponseEntity.ok().body(studentService.getAllStudents());
     }
 }
