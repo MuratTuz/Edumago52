@@ -27,4 +27,14 @@ public class DefaultUserService implements StudentService {
 
         return StudentMapper.INSTANCE.toDto(studentEntity);
     }
+
+    @Override
+    public StudentDTO findStudentById(Long id) {
+        return null;
+    }
+
+    @Override
+    public List<StudentDTO> findAllStudents() {
+        return null;
+    }
 }

@@ -2,7 +2,12 @@ package ch.iw.edumago.service;
 
 import ch.iw.edumago.model.StudentDTO;
 
-public interface StudentService {
+import java.util.List;
 
-    StudentDTO create(StudentDTO student);
+public interface StudentService {
+    StudentDTO create(StudentDTO it_club);
+
+    StudentDTO findStudentById(Long id);
+
+    List<StudentDTO> findAllStudents();
 }
