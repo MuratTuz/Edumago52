@@ -2,16 +2,17 @@ package ch.iw.edumago.controller;
 
 
 import ch.iw.edumago.model.StudentDTO;
+import ch.iw.edumago.model.TeacherDTO;
+import ch.iw.edumago.service.StudentService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.Arrays;
 import java.util.List;
 
 
@@ -20,6 +21,12 @@ import java.util.List;
 @RestController
 @RequestMapping("/students")
 public class StudentController {
+
+    private StudentService studentService;
+
+    public StudentController(@Qualifier("defaultStudentServiceImpl") StudentService studentService) {
+        this.studentService = studentService;
+    }
 
 
     @ApiOperation(value = "View a list of available employees", response = List.class)
@@ -32,10 +39,29 @@ public class StudentController {
 
     @GetMapping
     ResponseEntity<List<StudentDTO>> getAllStudents() {
+        return ResponseEntity.ok().body(studentService.findAllStudents());
+    }
 
-        StudentDTO mehmet = StudentDTO.builder().firstName("mehmet").lastName("dogan").build();
-        StudentDTO deniz = StudentDTO.builder().firstName("deniz").lastName("tokat").build();
+    @GetMapping("/{id}")
+    public ResponseEntity<StudentDTO> getById(@PathVariable Long id) {
+        return new ResponseEntity<>(studentService.findStudentById(id), HttpStatus.OK);
+    }
 
-        return ResponseEntity.ok().body(Arrays.asList(mehmet, deniz));
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public StudentDTO createStudent(@RequestBody StudentDTO studentDTO) {
+        return studentService.create(studentDTO);
+    }
+
+    @PutMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public StudentDTO updateStudent(@PathVariable Long id, @RequestBody StudentDTO studentDTO) {
+        return studentService.update(id, studentDTO);
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public void deleteStudentById(@PathVariable Long id) {
+        studentService.deleteById(id);
     }
 }

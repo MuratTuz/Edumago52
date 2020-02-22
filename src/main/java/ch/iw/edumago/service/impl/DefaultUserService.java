@@ -37,4 +37,14 @@ public class DefaultUserService implements StudentService {
     public List<StudentDTO> findAllStudents() {
         return null;
     }
+
+    @Override
+    public StudentDTO update(Long anyLong, StudentDTO any) {
+        return null;
+    }
+
+    @Override
+    public void deleteById(Long id) {
+
+    }
 }

@@ -1,6 +1,5 @@
 package ch.iw.edumago.service.impl;
 
-import ch.iw.edumago.exceptions.BadRequestException;
 import ch.iw.edumago.exceptions.NotFoundException;
 import ch.iw.edumago.model.StudentDTO;
 import ch.iw.edumago.persistency.repository.StudentRepository;
@@ -53,5 +52,15 @@ public class DefaultStudentServiceImpl implements StudentService {
                 .stream()
                 .map(studentEntity -> StudentMapper.INSTANCE.toDto(studentEntity))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public StudentDTO update(Long anyLong, StudentDTO studentDTO) {
+        return StudentMapper.INSTANCE.toDto(studentRepository.save(StudentMapper.INSTANCE.toEntity(studentDTO)));
+    }
+
+    @Override
+    public void deleteById(Long id) {
+        studentRepository.deleteById(id);
     }
 }
