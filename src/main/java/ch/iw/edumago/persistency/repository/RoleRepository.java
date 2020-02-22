@@ -1,9 +1,10 @@
 package ch.iw.edumago.persistency.repository;
 
-import ch.iw.edumago.persistency.entity.TeacherEntity;
+import ch.iw.edumago.persistency.entity.RoleEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface TeacherRepository extends JpaRepository<TeacherEntity, Long> {
+public interface RoleRepository extends JpaRepository<RoleEntity, Long> {
+    RoleEntity findByName(String role);
 }

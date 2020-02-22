@@ -33,6 +33,7 @@ public class StudentController {
             @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
             @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
     })
+
     @GetMapping
     ResponseEntity<List<StudentDTO>> getAllStudents() {
 
