@@ -1,6 +1,5 @@
 package ch.iw.edumago.service.impl;
 
-import ch.iw.edumago.exceptions.BadRequestException;
 import ch.iw.edumago.exceptions.NotFoundException;
 import ch.iw.edumago.model.StudentDTO;
 import ch.iw.edumago.persistency.repository.StudentRepository;
@@ -13,11 +12,11 @@ import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 @Service
-public class DefaultStudentServiceImpl implements StudentService {
+public class DefaultStudentService implements StudentService {
 
     private final StudentRepository studentRepository;
 
-    public DefaultStudentServiceImpl(StudentRepository studentRepository) {
+    public DefaultStudentService(StudentRepository studentRepository) {
         this.studentRepository = studentRepository;
     }
 
@@ -53,5 +52,15 @@ public class DefaultStudentServiceImpl implements StudentService {
                 .stream()
                 .map(studentEntity -> StudentMapper.INSTANCE.toDto(studentEntity))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public StudentDTO update(Long anyLong, StudentDTO studentDTO) {
+        return StudentMapper.INSTANCE.toDto(studentRepository.save(StudentMapper.INSTANCE.toEntity(studentDTO)));
+    }
+
+    @Override
+    public void deleteById(Long id) {
+        studentRepository.deleteById(id);
     }
 }

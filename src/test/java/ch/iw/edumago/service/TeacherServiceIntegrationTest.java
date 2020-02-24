@@ -5,12 +5,10 @@ import ch.iw.edumago.exceptions.NotFoundException;
 import ch.iw.edumago.model.RoleDTO;
 import ch.iw.edumago.model.TeacherDTO;
 import ch.iw.edumago.persistency.entity.ERole;
-import ch.iw.edumago.persistency.entity.RoleEntity;
 import ch.iw.edumago.persistency.repository.RoleRepository;
 import ch.iw.edumago.persistency.repository.TeacherRepository;
 import ch.iw.edumago.service.mapper.RoleMapper;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,34 +34,19 @@ public class TeacherServiceIntegrationTest {
     @Autowired
     private TeacherRepository teacherRepository;
 
-    private RoleEntity savedRole;
-    private TeacherDTO teacher;
-
-    @BeforeEach
-    void setup() {
-        RoleEntity role = RoleEntity.builder().name(ERole.ROLE_TEACHER).build();
-        savedRole = roleRepository.save(role);
-
-        createTeacherDTO();
-    }
-
-    private void createTeacherDTO(){
-        final String edumago = "Edumago";
-
-        Set<RoleDTO> roleDTOS = new HashSet<>();
-        roleDTOS.add(RoleMapper.INSTANE.toDTO(savedRole));
-
-        teacher = teacherService.create(TeacherDTO.builder()
-                .firstName(edumago)
-                .lastName("IT Club")
-                .roles(roleDTOS)
-                .build());
-    }
-
     @Test
     @DisplayName("A new Teacher is created.")
     public void createTeacherTest() {
         final String edumago = "Edumago";
+
+        Set<RoleDTO> roleDTOS = new HashSet<>();
+        roleDTOS.add(RoleMapper.INSTANE.toDTO(roleRepository.findByName(ERole.ROLE_TEACHER)));
+
+        TeacherDTO teacher = teacherService.create(TeacherDTO.builder()
+                .firstName(edumago)
+                .lastName("IT Club")
+                .roles(roleDTOS)
+                .build());
 
         Assertions.assertNotEquals(teacher, null);
         Assertions.assertNotEquals(teacher.getId(), null);
@@ -87,6 +70,16 @@ public class TeacherServiceIntegrationTest {
     @Test
     @DisplayName("Find A Teacher by id.")
     public void findTeacherByIdTest() {
+        final String edumago = "Edumago";
+
+        Set<RoleDTO> roleDTOS = new HashSet<>();
+        roleDTOS.add(RoleMapper.INSTANE.toDTO(roleRepository.findByName(ERole.ROLE_TEACHER)));
+
+        TeacherDTO teacher = teacherService.create(TeacherDTO.builder()
+                .firstName(edumago)
+                .lastName("IT Club")
+                .roles(roleDTOS)
+                .build());
 
         //when
         TeacherDTO teacherDTO = teacherService.findById(teacher.getId());
