@@ -12,11 +12,11 @@ import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 @Service
-public class DefaultStudentServiceImpl implements StudentService {
+public class DefaultStudentService implements StudentService {
 
     private final StudentRepository studentRepository;
 
-    public DefaultStudentServiceImpl(StudentRepository studentRepository) {
+    public DefaultStudentService(StudentRepository studentRepository) {
         this.studentRepository = studentRepository;
     }
 

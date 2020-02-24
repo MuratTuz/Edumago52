@@ -2,7 +2,6 @@ package ch.iw.edumago.controller;
 
 
 import ch.iw.edumago.model.StudentDTO;
-import ch.iw.edumago.model.TeacherDTO;
 import ch.iw.edumago.service.StudentService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -24,7 +23,7 @@ public class StudentController {
 
     private StudentService studentService;
 
-    public StudentController(@Qualifier("defaultStudentServiceImpl") StudentService studentService) {
+    public StudentController(StudentService studentService) {
         this.studentService = studentService;
     }
 

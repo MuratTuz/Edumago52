@@ -13,11 +13,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class DefaultTeacherServiceImpl implements TeacherService {
+public class DefaultTeacherService implements TeacherService {
 
     private final TeacherRepository teacherRepository;
 
-    public DefaultTeacherServiceImpl(TeacherRepository teacherRepository) {
+    public DefaultTeacherService(TeacherRepository teacherRepository) {
         this.teacherRepository = teacherRepository;
     }
 
