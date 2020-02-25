@@ -43,7 +43,8 @@ public class TeacherController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public TeacherDTO createTeacher(@RequestBody TeacherDTO teacherDTO) {
-        return teacherService.create(teacherDTO);
+
+        return teacherService.create(TeacherDTO.builder().firstName("cemil").lastName("dogan").build());
     }
 
     @PutMapping("/{id}")
