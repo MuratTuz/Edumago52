@@ -11,5 +11,6 @@ public interface TeacherMapper {
     TeacherMapper INSTANCE = Mappers.getMapper(TeacherMapper.class);
 
     TeacherEntity toEntity(TeacherDTO teacherDTO);
+
     TeacherDTO toDTO(TeacherEntity teacherEntity);
 }
