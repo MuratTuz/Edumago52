@@ -2,7 +2,7 @@ package ch.iw.edumago.controller;
 
 
 import ch.iw.edumago.model.EnrollmentDTO;
-import ch.iw.edumago.service.impl.DefaultEnrollmentServiceImpl;
+import ch.iw.edumago.service.impl.DefaultEnrollmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,7 +14,7 @@ import java.util.List;
 @RequestMapping("/enrollments")
 public class EnrollmentController {
 
-    @Autowired private DefaultEnrollmentServiceImpl enrollmentService;
+    @Autowired private DefaultEnrollmentService enrollmentService;
 
     @RequestMapping
     ResponseEntity<List<EnrollmentDTO>> getAllEnrollments() {

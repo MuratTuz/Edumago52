@@ -4,6 +4,9 @@ import lombok.*;
 
 import javax.persistence.*;
 
+/*
+Enrollment class çalisabilsin diye bu entity i Murat olusturdu.
+ */
 @Getter
 @Setter
 @Entity

@@ -1,9 +1,7 @@
 package ch.iw.edumago.service.mapper;
 
 import ch.iw.edumago.model.EnrollmentDTO;
-import ch.iw.edumago.model.StudentDTO;
 import ch.iw.edumago.persistency.entity.EnrollmentEntity;
-import ch.iw.edumago.persistency.entity.StudentEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 

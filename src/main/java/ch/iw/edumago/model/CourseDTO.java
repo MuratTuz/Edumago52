@@ -2,10 +2,10 @@
 package ch.iw.edumago.model;
 
 
-        import lombok.*;
-
-        import java.time.LocalDate;
-
+import lombok.*;
+/*
+ Enrollment class çalisabilsin diye onunla iliskili bu class i Murat olusturdu.
+ */
 @Getter
 @Setter
 @NoArgsConstructor
