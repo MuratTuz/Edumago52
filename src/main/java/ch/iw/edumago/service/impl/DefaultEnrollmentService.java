@@ -24,9 +24,9 @@ public class DefaultEnrollmentService implements EnrollmentService {
 
     @Override
     @Transactional
-    public EnrollmentDTO create(EnrollmentDTO enrollment) {
+    public EnrollmentDTO create(EnrollmentDTO enrollmentDTO) {
 
-        EnrollmentEntity enrollmentEntity = EnrollmentMapper.INSTANCE.toEntity(enrollment);
+        EnrollmentEntity enrollmentEntity = EnrollmentMapper.INSTANCE.toEntity(enrollmentDTO);
         enrollmentEntity = enrollmentRepository.save(enrollmentEntity);
 
         return EnrollmentMapper.INSTANCE.toDto(enrollmentEntity);
