@@ -2,6 +2,7 @@ package ch.iw.edumago.service.impl;
 
 import ch.iw.edumago.exceptions.NotFoundException;
 import ch.iw.edumago.model.EnrollmentDTO;
+import ch.iw.edumago.model.TeacherDTO;
 import ch.iw.edumago.persistency.entity.EnrollmentEntity;
 import ch.iw.edumago.persistency.entity.StudentEntity;
 import ch.iw.edumago.persistency.repository.EnrollmentRepository;
@@ -11,6 +12,7 @@ import ch.iw.edumago.service.EnrollmentService;
 import ch.iw.edumago.service.StudentService;
 import ch.iw.edumago.service.mapper.EnrollmentMapper;
 import ch.iw.edumago.service.mapper.StudentMapper;
+import ch.iw.edumago.service.mapper.TeacherMapper;
 import org.mapstruct.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -45,9 +47,9 @@ public class DefaultEnrollmentService implements EnrollmentService {
         }
 
         return enrollmentRepository.findAll()
-                                    .stream()
-                                    .map(entity -> EnrollmentMapper.INSTANCE.toDto(entity))
-                                    .collect(Collectors.toList());
+                .stream()
+                .map(entity -> EnrollmentMapper.INSTANCE.toDto(entity))
+                .collect(Collectors.toList());
 
     }
 
@@ -55,4 +57,17 @@ public class DefaultEnrollmentService implements EnrollmentService {
     public EnrollmentDTO findById(Long id) {
         return enrollmentRepository.findById(id).map(entity -> EnrollmentMapper.INSTANCE.toDto(entity)).get();
     }
+
+    @Override
+    @Transactional
+    public EnrollmentDTO update(Long id, EnrollmentDTO enrollmentDTO) {
+
+        return EnrollmentMapper.INSTANCE.toDto(enrollmentRepository.save(EnrollmentMapper.INSTANCE.toEntity(enrollmentDTO)));
+    }
+
+    @Override
+    public void delete(Long id) {
+        enrollmentRepository.deleteById(id);
+    }
+
 }

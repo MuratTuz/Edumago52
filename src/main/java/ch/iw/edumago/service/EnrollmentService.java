@@ -12,4 +12,8 @@ public interface EnrollmentService {
 
     EnrollmentDTO findById(Long id);
 
+    EnrollmentDTO update(Long id, EnrollmentDTO enrollmentDTO);
+
+    void delete(Long id);
+
 }

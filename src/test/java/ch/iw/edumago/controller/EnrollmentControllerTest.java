@@ -1,5 +1,6 @@
 package ch.iw.edumago.controller;
 
+import ch.iw.edumago.exceptions.NotFoundException;
 import ch.iw.edumago.model.EnrollmentDTO;
 import ch.iw.edumago.model.TeacherDTO;
 import ch.iw.edumago.service.EnrollmentService;
@@ -27,9 +28,10 @@ import java.util.List;
 import static org.hamcrest.Matchers.*;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @DisplayName("Testing Enrollment Controller")
@@ -76,8 +78,9 @@ public class EnrollmentControllerTest {
     @Test
     @DisplayName("Get Selected Enrollment - name = enroll_1")
     void findSelectedEnrollmentTest() throws Exception {
-
+        //given
         when(enrollmentService.findById(1L)).thenReturn(enrollmentDTO1);
+
         mockMvc.perform(get("/enrollments/1")
                 .contentType("application/json"))
                 .andExpect(status().isOk())
@@ -102,9 +105,50 @@ public class EnrollmentControllerTest {
         //whenThen
         mockMvc.perform(post("/enrollments")
                .content(asJsonString(enrollmentDTO1))
+               .contentType(MediaType.APPLICATION_JSON)
+               .accept(MediaType.APPLICATION_JSON))
+               .andExpect(status().isCreated())
+               .andExpect(jsonPath("$.name").value("enroll_1"));
+    }
+
+    @Test
+    @DisplayName("Get Enrollment ById NotFoundException")
+    void findEnrollmentByIdNotFoundExceptionTest() throws Exception {
+        //given
+        when(enrollmentService.findById(anyLong())).thenThrow(NotFoundException.class);
+
+        mockMvc.perform(get("/enrollments/1"))
+                .andExpect(status().isNotFound());
+    }
+
+    @Test
+    @DisplayName("Get Enrollment ById BadRequestException")
+    void findEnrollmentByIdBadRequestExceptionTest() throws Exception {
+        //givenThen
+        mockMvc.perform(get("/enrollments/murat"))
+                .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    @DisplayName("Update Enrollment")
+    void updateEnrollmentTest() throws Exception {
+        //given
+        when(enrollmentService.update(anyLong(), any(EnrollmentDTO.class))).thenReturn(enrollmentDTO1);
+
+        //whenThen
+        mockMvc.perform(put("/enrollments/{id}", 2)
+                .content(asJsonString(enrollmentDTO1))
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isCreated())
+                .andExpect(status().isNoContent())
                 .andExpect(jsonPath("$.name").value("enroll_1"));
     }
+
+    @Test
+    @DisplayName("Delete Enrollment By id")
+    void deleteEnrollmentByIdTest() throws Exception {
+        mockMvc.perform(delete("/enrollments/{id}", 1) )
+                .andExpect(status().isAccepted());
+    }
+
 }
