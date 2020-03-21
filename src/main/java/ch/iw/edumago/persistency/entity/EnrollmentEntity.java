@@ -1,9 +1,6 @@
 package ch.iw.edumago.persistency.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
@@ -18,11 +15,18 @@ import java.util.List;
 @AllArgsConstructor
 @Entity
 @Table(name = "edu_enrollment")
+@Builder
 public class EnrollmentEntity {
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
+
+    @NotNull
+    @NotEmpty
+    @Size(min=3)
+    @Column(name = "name")
+    private String name;
 
     @ManyToMany
     private List<StudentEntity> students;

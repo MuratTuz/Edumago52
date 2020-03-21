@@ -11,5 +11,6 @@ public interface EnrollmentMapper {
     EnrollmentMapper INSTANCE = Mappers.getMapper(EnrollmentMapper.class);
 
     EnrollmentDTO toDto(EnrollmentEntity enrollmentEntity);
+
     EnrollmentEntity toEntity(EnrollmentDTO enrollmentDTO);
 }

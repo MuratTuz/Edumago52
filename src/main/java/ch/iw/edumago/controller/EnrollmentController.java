@@ -2,8 +2,10 @@ package ch.iw.edumago.controller;
 
 
 import ch.iw.edumago.model.EnrollmentDTO;
+import ch.iw.edumago.service.EnrollmentService;
 import ch.iw.edumago.service.impl.DefaultEnrollmentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,26 +16,22 @@ import java.util.List;
 @RequestMapping("/enrollments")
 public class EnrollmentController {
 
-    @Autowired private DefaultEnrollmentService enrollmentService;
+    @Autowired private EnrollmentService enrollmentService;
 
     @RequestMapping
     ResponseEntity<List<EnrollmentDTO>> getAllEnrollments() {
-        EnrollmentDTO course1 = EnrollmentDTO.builder().id(1L).build();
-        EnrollmentDTO course2 = EnrollmentDTO.builder().id(2L).build();
-
-        return ResponseEntity.ok().body(Arrays.asList(course1, course2));
+        return ResponseEntity.ok().body(enrollmentService.findAll());
     }
 
 
-    @RequestMapping(value = "/{selectedID}")
-    ResponseEntity<EnrollmentDTO> getSelectedEnrollment(@PathVariable String selectedID) {
-        EnrollmentDTO course1 = EnrollmentDTO.builder().id(Long.parseLong(selectedID)).build();
-        return ResponseEntity.ok().body(course1);
+    @RequestMapping(value = "/{id}")
+    ResponseEntity<EnrollmentDTO> getById(@PathVariable String id) {
+        return ResponseEntity.ok().body(enrollmentService.findById(Long.parseLong(id)));
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    @PostMapping
-    String addEnrollment(@RequestBody EnrollmentDTO enrollmentDTO) {
-        return enrollmentService.add(enrollmentDTO).toString();
+    @ResponseStatus(HttpStatus.CREATED)
+    EnrollmentDTO addEnrollment(@RequestBody EnrollmentDTO enrollmentDTO) {
+        return enrollmentService.create(enrollmentDTO);
     }
 }

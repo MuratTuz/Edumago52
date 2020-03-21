@@ -1,5 +1,6 @@
 package ch.iw.edumago.service.impl;
 
+import ch.iw.edumago.exceptions.NotFoundException;
 import ch.iw.edumago.model.EnrollmentDTO;
 import ch.iw.edumago.persistency.entity.EnrollmentEntity;
 import ch.iw.edumago.persistency.entity.StudentEntity;
@@ -16,27 +17,42 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class DefaultEnrollmentService implements EnrollmentService {
 
-    @Autowired private EnrollmentRepository enrollmentRepository;
+    private final EnrollmentRepository enrollmentRepository;
+
+    public DefaultEnrollmentService(EnrollmentRepository enrollmentRepository) {
+        this.enrollmentRepository = enrollmentRepository;
+    }
 
     @Override
     @Transactional
     public EnrollmentDTO create(EnrollmentDTO enrollmentDTO) {
 
         EnrollmentEntity enrollmentEntity = EnrollmentMapper.INSTANCE.toEntity(enrollmentDTO);
-        enrollmentEntity = enrollmentRepository.save(enrollmentEntity);
+        EnrollmentEntity savedEnrollmentEntity = enrollmentRepository.save(enrollmentEntity);
 
-        return EnrollmentMapper.INSTANCE.toDto(enrollmentEntity);
+        return EnrollmentMapper.INSTANCE.toDto(savedEnrollmentEntity);
     }
 
     @Override
-    public Long add(EnrollmentDTO enrollmentDTO) {
-        EnrollmentEntity enrollmentEntity = EnrollmentMapper.INSTANCE.toEntity(enrollmentDTO);
-        enrollmentEntity = enrollmentRepository.save(enrollmentEntity);
+    public List<EnrollmentDTO> findAll() {
+        if (enrollmentRepository.findAll().isEmpty()) {
+            throw new NotFoundException("There is no enrollment yet");
+        }
 
-        return enrollmentEntity.getId();
+        return enrollmentRepository.findAll()
+                                    .stream()
+                                    .map(entity -> EnrollmentMapper.INSTANCE.toDto(entity))
+                                    .collect(Collectors.toList());
+
+    }
+
+    @Override
+    public EnrollmentDTO findById(Long id) {
+        return enrollmentRepository.findById(id).map(entity -> EnrollmentMapper.INSTANCE.toDto(entity)).get();
     }
 }
